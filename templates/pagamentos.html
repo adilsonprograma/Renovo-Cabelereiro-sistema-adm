@@ -1,0 +1,52 @@
+﻿{% extends 'base.html' %}
+{% block title %}Pagamentos{% endblock %}
+{% block content %}
+<div class="page-header">
+  <h1>Pagamentos</h1>
+  <button class="btn-primary" onclick="document.getElementById('modal-pag').classList.add('show')">
+    <i class="fa-solid fa-plus"></i> Registrar pagamento</button>
+</div>
+{% if pendentes %}
+<div class="card alert-card">
+  <h2><i class="fa-solid fa-clock"></i> Aguardando pagamento</h2>
+  <ul class="alert-list">
+  {% for p in pendentes %}<li>{{ p.cliente }} - {{ p.servico }} ({{ p.preco|moeda }})</li>{% endfor %}
+  </ul>
+</div>
+{% endif %}
+<div class="card"><div class="table-wrap"><table>
+  <thead><tr><th>Data</th><th>Cliente</th><th>Valor</th><th>Forma</th></tr></thead>
+  <tbody>
+  {% for p in pagamentos %}
+    <tr><td>{{ p.data|data_br }}</td><td>{{ p.cliente }}</td>
+    <td class="valor-positivo">{{ p.valor|moeda }}</td>
+    <td><span class="badge badge-forma">{{ p.forma }}</span></td></tr>
+  {% else %}<tr><td colspan="4" class="empty">Nenhum pagamento registrado.</td></tr>{% endfor %}
+  </tbody></table></div></div>
+<div class="modal" id="modal-pag"><div class="modal-box">
+  <div class="modal-header"><h2>Registrar pagamento</h2>
+    <button onclick="document.getElementById('modal-pag').classList.remove('show')" class="btn-close">&times;</button></div>
+  <form method="POST" action="{{ url_for('novo_pagamento') }}">
+    {% if pendentes %}
+    <label>Vincular a um agendamento (opcional)</label>
+    <select name="agendamento_id" onchange="preencherPagamento(this)">
+      <option value="">- Nenhum -</option>
+      {% for p in pendentes %}
+      <option value="{{ p.id }}" data-cliente="{{ p.cliente }}" data-valor="{{ p.preco }}">{{ p.cliente }} - {{ p.servico }}</option>
+      {% endfor %}
+    </select>
+    {% endif %}
+    <label>Cliente</label><input type="text" name="cliente" id="input-cliente" required>
+    <label>Valor (R$)</label><input type="number" step="0.01" name="valor" id="input-valor" required>
+    <label>Forma de pagamento</label>
+    <select name="forma" required>
+      <option value="Dinheiro">Dinheiro</option>
+      <option value="Cartão de Débito">Cartão de Débito</option>
+      <option value="Cartão de Crédito">Cartão de Crédito</option>
+      <option value="PIX">PIX</option>
+    </select>
+    <label>Data</label><input type="date" name="data" required>
+    <button type="submit" class="btn-primary full">Registrar</button>
+  </form>
+</div></div>
+{% endblock %}

@@ -1,0 +1,41 @@
+﻿{% extends 'base.html' %}
+{% block title %}Relatórios{% endblock %}
+{% block content %}
+<h1>Relatórios</h1>
+<p class="subtitle">Desempenho financeiro do salão.</p>
+<div class="cards-grid">
+  <div class="card stat-card"><i class="fa-solid fa-calendar-day"></i>
+    <div><span class="stat-value">{{ total_hoje|moeda }}</span><span class="stat-label">Hoje</span></div></div>
+  <div class="card stat-card"><i class="fa-solid fa-calendar-week"></i>
+    <div><span class="stat-value">{{ total_semana|moeda }}</span><span class="stat-label">Esta semana</span></div></div>
+  <div class="card stat-card"><i class="fa-solid fa-calendar"></i>
+    <div><span class="stat-value">{{ total_mes|moeda }}</span><span class="stat-label">Este mês</span></div></div>
+  <div class="card stat-card highlight"><i class="fa-solid fa-chart-line"></i>
+    <div><span class="stat-value">{{ media_diaria|moeda }}</span><span class="stat-label">Média diária</span></div></div>
+</div>
+<div class="cards-2col">
+  <div class="card"><h2>Serviços mais populares</h2>
+    {% if servicos_populares %}<ul class="ranking-list">
+    {% for s in servicos_populares %}
+      <li><span class="ranking-name">{{ s.servico }}</span><span class="ranking-info">{{ s.qtd }}x - {{ s.total|moeda }}</span></li>
+    {% endfor %}</ul>{% else %}<p class="empty">Sem dados suficientes.</p>{% endif %}
+  </div>
+  <div class="card"><h2>Formas de pagamento</h2>
+    {% if formas_pagamento %}<ul class="ranking-list">
+    {% for f in formas_pagamento %}
+      <li><span class="ranking-name">{{ f.forma }}</span><span class="ranking-info">{{ f.qtd }}x - {{ f.total|moeda }}</span></li>
+    {% endfor %}</ul>{% else %}<p class="empty">Sem dados suficientes.</p>{% endif %}
+  </div>
+</div>
+<div class="card">
+  <h2>Faturamento - últimos 30 dias</h2>
+  {% if ultimos_30_dias %}
+  <div class="mini-chart">
+    {% set max_val = ultimos_30_dias|map(attribute='total')|max %}
+    {% for d in ultimos_30_dias %}
+    <div class="bar" style="height: {{ (d.total / max_val * 100)|round if max_val else 3 }}%" title="{{ d.data|data_br }}: {{ d.total|moeda }}"></div>
+    {% endfor %}
+  </div>
+  {% else %}<p class="empty">Sem dados suficientes para exibir o gráfico.</p>{% endif %}
+</div>
+{% endblock %}

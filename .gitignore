@@ -1,0 +1,14 @@
+﻿__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+ENV/
+instance/
+.pytest_cache/
+.vscode/
+.idea/
+# Ignorar a base de dados local para não expor dados de clientes no GitHub
+salao.db

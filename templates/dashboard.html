@@ -1,0 +1,37 @@
+﻿{% extends 'base.html' %}
+{% block title %}Início{% endblock %}
+{% block content %}
+<h1>Olá!</h1>
+<p class="subtitle">Resumo do salão hoje.</p>
+<div class="cards-grid">
+  <div class="card stat-card"><i class="fa-solid fa-calendar-day"></i>
+    <div><span class="stat-value">{{ agendamentos_hoje|length }}</span><span class="stat-label">Agendamentos hoje</span></div></div>
+  <div class="card stat-card"><i class="fa-solid fa-sack-dollar"></i>
+    <div><span class="stat-value">{{ total_mes|moeda }}</span><span class="stat-label">Faturamento do mês</span></div></div>
+  <div class="card stat-card"><i class="fa-solid fa-calendar-check"></i>
+    <div><span class="stat-value">{{ total_agendamentos }}</span><span class="stat-label">Total de agendamentos</span></div></div>
+  <div class="card stat-card {{ 'alert' if estoque_baixo else '' }}"><i class="fa-solid fa-triangle-exclamation"></i>
+    <div><span class="stat-value">{{ estoque_baixo|length }}</span><span class="stat-label">Produtos em falta</span></div></div>
+</div>
+<div class="card">
+  <h2>Agenda de hoje</h2>
+  {% if agendamentos_hoje %}
+  <div class="table-wrap"><table>
+    <thead><tr><th>Hora</th><th>Cliente</th><th>Serviço</th><th>Status</th></tr></thead>
+    <tbody>
+    {% for a in agendamentos_hoje %}
+      <tr><td>{{ a.hora }}</td><td>{{ a.cliente }}</td><td>{{ a.servico }}</td>
+      <td><span class="badge badge-{{ a.status }}">{{ a.status }}</span></td></tr>
+    {% endfor %}
+    </tbody></table></div>
+  {% else %}<p class="empty">Nenhum agendamento para hoje.</p>{% endif %}
+</div>
+{% if estoque_baixo %}
+<div class="card alert-card">
+  <h2><i class="fa-solid fa-triangle-exclamation"></i> Estoque baixo</h2>
+  <ul class="alert-list">
+  {% for p in estoque_baixo %}<li>{{ p.nome }} - restam {{ p.quantidade }} unidades</li>{% endfor %}
+  </ul>
+</div>
+{% endif %}
+{% endblock %}
