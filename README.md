@@ -1,6 +1,6 @@
 ﻿# ✂️ Renovo Cabeleireiros
 
-O **Renovo Cabeleireiros** é um sistema de gestão comercial e controlo financeiro residencial/local, desenvolvido especificamente para salões de beleza, barbeiros e profissionais autónomos do setor de estética.
+O **Renovo Cabeleireiros** é um sistema de gestão comercial e controle financeiro residencial/local, desenvolvido especificamente para salões de beleza, barbeiros e profissionais autónomos do setor de estética.
 
 Este sistema foi construído focando na leveza, rapidez de resposta e numa interface visual moderna baseada num ecossistema local (Offline-First). Ele transforma o navegador do seu computador num autêntico painel de controlo profissional (Desktop App) através de scripts automatizados de segundo plano.[cite: 1]
 
@@ -8,7 +8,7 @@ Este sistema foi construído focando na leveza, rapidez de resposta e numa inter
 
 ## 🚀 Funcionalidades Principais
 
-* **📅 Agenda Dinâmica:** Registo e controlo completo de agendamentos diários organizados por horário, cliente, contacto e status (Pendente, Confirmado, Concluído e Cancelado).[cite: 1]
+* **📅 Agenda Dinâmica:** Registo e controle completo de agendamentos diários organizados por horário, cliente, contacto e status (Pendente, Confirmado, Concluído e Cancelado).[cite: 1]
 * **💰 Fluxo de Caixa Integrado:** Módulo de faturação com histórico de pagamentos suportando múltiplos métodos (Dinheiro, PIX, Cartão de Crédito e Débito).[cite: 1]
 * **📦 Controlo Patrimonial de Estoque:**
     * Gestão automatizada de insumos e produtos com margem de segurança ajustada para alertas de stock baixo.[cite: 1]
@@ -88,4 +88,4 @@ Para usar o sistema como um programa nativo do Windows:[cite: 1]
 Para proteger o seu negócio e cumprir as boas práticas de desenvolvimento, este repositório está configurado para **nunca** enviar o ficheiro `salao.db` para a nuvem pública do GitHub. Isto garante que a lista de clientes, números de telefone e faturamento financeiro real fiquem guardados estritamente na memória física do seu computador de trabalho.[cite: 1]
 
 ---
-Desenvolvido com foco em praticidade e aplicação imediata. 💇‍♀️✂️[cite: 1]
+Desenvolvido por Adilson  com foco em praticidade e aplicação imediata. 💇‍♀️✂️[cite: 1]
